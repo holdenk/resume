@@ -1,13 +1,16 @@
 % RESUME DOCUMENT STYLE -- Released 23 Nov 1989
 %    for LaTeX version 2.09
 % Copyright (C) 1988,1989 by Michael DeCorte
+% Portions Copyright (C) 2012 by Holden Karau
 
-\typeout{Document Style `res' <26 Sep 89>.}
+\usepackage{url}
+\usepackage{pst-barcode}
 
+\typeout{Document Style `newsres' <21 Jan 2012>.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% res.sty
+% newsres.sty
 %
-% \documentstyle{res}
+% \documentstyle{newsres}
 %
 % Copyright (c) 1988 by Michael DeCorte
 % Permission to copy all or part of this work is granted, provided
@@ -28,6 +31,7 @@
 % mrd@clutx.bitnet
 %
 % Changes for LaTeX2e -- Venkat Krishnamurthy (Aug 7, 2001)
+% Change to add a QR Code -- Holden Karau 2012
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % You can have multiple style options the legal options ones are:
@@ -180,7 +184,7 @@
 % write docs to tell people how to use this
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{res}[2000/05/19 v1.4b Resume class]
+\ProvidesClass{newsres}[2012/01/21 v1.4c Resume class]
 
 %\DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 %\DeclareOption{12pt}{\renewcommand\@ptsize{2}}
@@ -236,8 +240,12 @@
 %
 \def\namefont{\large\bf}
 \def\@linename{\begingroup
+  \begin{pspicture}(1in,1in)
+    \psbarcode{\@web}{}{qrcode}
+  \end{pspicture}
   \def\\{, }
   {\namefont\@name}
+  \leavevmode\hbox to \textwidth{\hfil\@tablebox{\@web}\hfil}\par
   \vskip 2pt
   \fullline
   \vskip 2pt
@@ -488,6 +496,14 @@
 \def\name#1{\def\@name{#1}}
 
 \def\@name{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use this to define your website
+%
+\def\web#1{\def\@web{#1}}
+
+\def\@web{}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % use this to define your address, this may be called more than once.
