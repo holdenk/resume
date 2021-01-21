@@ -5,6 +5,8 @@
 
 \usepackage{url}
 \usepackage{pst-barcode}
+\usepackage{xifthen}
+\usepackage{ltxcmds}
 
 \typeout{Document Style `newsres' <21 Jan 2012>.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -245,20 +247,20 @@
   \end{pspicture}
   \def\\{, }
   {\namefont\@name}
-  \leavevmode\hbox to \textwidth{\hfil\@tablebox{\@web}\hfil}\par
-  \vskip 2pt
+  \leavevmode\hbox to \textwidth{\hfil\@tablebox{\@web}\hfil}
+  \newline\par
   \fullline
-  \vskip 2pt
-  % where do you live?
-  \@ifundefined{@addressone}{%
+  % where do you live? %
+  \@ifundefined{@addressone}{
     % do nothing
-  }{%
+  }{
+    % print address %
     \leavevmode\hbox to \textwidth
       {\hfill\vbox{\hbox{\@addressone}
 		   \hbox{\@addresstwo}
-		  }%
-      }\par
-  }
+		  }
+      }
+  }\newline\par
 \endgroup}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -466,6 +468,7 @@
 % with everything in the left of its column
 
 %\input article.sty
+
 
 \if@line\ds@line\else\ds@centered\fi
 \if@margin\ds@margin\else\ds@overlapped\fi
